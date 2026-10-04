@@ -20,4 +20,4 @@ In the search functionality I entered ` ' ` and an error was generated which ind
 Now for post requests you have to have a copy of the request header in a file which you can get through the `Network tab` of dev tools for the request or use BurpSuite and save the request
 I also saw a GET parameter was present but when trying out ` ' ` it didn't return anything just blank, but I ended up trying that using `SQLMap` and for some reason it worked but it was `boolean based blind sql Injection`.
 The intended path was POST though, but anyways I still decided to proceed as it was vulnerable and then I ended up dumping the database, as seen below
- 
+ ![sql_databases](sql_db.png)
