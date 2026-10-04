@@ -57,8 +57,18 @@ So I forgot to mention that after we logged in as prometheus in the `~` endpoint
 
 But after we log in using the user prometheus and the password we cracked for the subdomain `chat.olympus.thm` we see that some chats are present and they are talking about some files that are being uploaded but inorder to find the file or execute them basically the pathname to access them is hard or unpredictable cause some weird function is being used. I see...
 
-Previous knowledge is important for connecting things, The chats endpoint
+Previous knowledge is important for connecting things, Basically we had a table called `chats` so lets check that out, hmm as we can see in the image below the name of the file that we upload here in chat and the filename is the modified one which is hard to guess.
+![Chats:](Images/Chats.png)
 
+So now we can upload a php-reverse-shell to gain access on the filesystem, PHPSESSIONID was used as cookies and other indicators help us know that backend is using PHP. The PHP rev shell can be obtained online just search it up or search for GitHub repos.
+
+Now open the PHP rev shell file and change the IP address to your system one and make sure the interface is right, if you are connected to THM's network using VPN then the interface would be `TUN0` and then change the port to the desired one like `4444` or `1234` 
+
+Now on your attacking machine run the command `nc -lvnp 4444` to start a listener on port 4444 and then upload the php rev shell on the chat and then dump the chat table again. Make sure in the `SQLmap` command you add --fresh-queries to ensure cache responses are not returned.
+
+Now once you find the filename which is a random string, you go to the endpoint /uploads/<filename>.php(A common directory for storing uploaded files) and boom the reverse shell executes and when you go back to the terminal in your attacking machine you get the shell.
+
+You can stabilize the shell so that the shell prompt looks better and feel interactive using -> `python3 -c 'import pty; pty.spawn("/bin/bash")'`
 
  
 
