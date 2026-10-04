@@ -1,1 +1,23 @@
-CTF-Olympus
+
+Step 1: Scan the target and resolve the host
+Upon scanning the target I found two open ports-> ssh and http
+intially I tried to access the website but it indicated that the page was not found or can't be reached.
+I even tried searching for an exploit related to the ssh and http versions respectively
+The issue was the ip resolved to a domain called 'olympus.thm' and it had to be locally resolved
+so in the `/etc/hosts/` file an entry was to be made: <ip> olympus.thm
+Now the website was accessible
+
+Step 2: Directory Enumeration
+The website didn't give away much from the content that was displayed so the classic approach in such challenges would be to try to bruteforce for endpoints or basically perform `directory bruteforcing`.
+so I initially used the IP of the target for the url which again created an issue as when Vhosts or Virtual hosts are present then an ip address can point to multiple servers so the host will be used for directing traffic
+to the correct server.
+The following command I ran: `gobuster dir -u http://olympus.thm -w /usr/share/wordlists/dirb/common.txt`  Note: if the wordlist in the `dirbuster` directory does not work, the `common.txt` can be tried as well.
+One endpoint looked weird it started with "~" so I tried accessing it
+
+Step 3: SQL Injection
+The webpage looked like it had a search functionality along with filters and login form plus nothing else seemed interesting
+In the search functionality I entered ` ' ` and an error was generated which indicated towards some mysql syntax error, I see... SQL injection it is...
+Now for post requests you have to have a copy of the request header in a file which you can get through the `Network tab` of dev tools for the request or use BurpSuite and save the request
+I also saw a GET parameter was present but when trying out ` ' ` it didn't return anything just blank, but I ended up trying that using `SQLMap` and for some reason it worked but it was `boolean based blind sql Injection`.
+The intended path was POST though, but anyways I still decided to proceed as it was vulnerable and then I ended up dumping the database, as seen below
+ 
