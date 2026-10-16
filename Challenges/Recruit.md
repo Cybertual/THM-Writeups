@@ -1,11 +1,14 @@
 Step 1: Scan the Target
+
 `nmap -p- -Pn <ip> -T4` reveals that three ports are open with services being `ssh,dns and http`
 Lets try to visit the website and see what we have in it.
 
 Step 2: Enumerate the website
+
 So the webpage has a login form and we don't know the credentials, putting `'` doesn't give any specific or generic error so let's assume its not vulnerable to SQL Injection, at least at this stage.
 We click on `Access API` button which is below. So we are directed to `api.php` and  it mentions something about fetching CV from external sources during recruitment process.
 And an endpoint is given with a parameter where we can put CV to access it. Also it is mentioned below that requesting restricted location on target is not allowed or blocked by API.
+[!API](/Images/API_restriction.png)
 
 Step 3: Directory Bruteforcing
 
