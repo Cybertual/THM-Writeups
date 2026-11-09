@@ -4,9 +4,11 @@ Command-> `nmap -Pn -p- <ip> -T4`
 
 Performing nmap scan gave us few open ports as shown below
 
-`<image>`
+![scan:](Images/checkmate_scan.png)
+
 performing service scan showed us their services and versions and turned out all are running Python server
-`<image>`
+
+![scan_version:](Images/Checkmate_version.png)
 
 lets try accessing port `5000` first.
 
@@ -15,6 +17,7 @@ Step 2: Security Assessment of passwords
 
 Upon visiting the webpage we see levels and we are on the first level.
 The goal is to assess password for the services mentioned
+
 Level 1 mentions Firewall running on port `5001` and its password has to cracked.
 
 Step 3: Level 1
