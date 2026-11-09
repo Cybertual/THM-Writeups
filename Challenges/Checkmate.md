@@ -28,12 +28,14 @@ The reliable option seems to be using Hydra to Brute Force
 
 so we use the command-> `hydra -l admin -P /usr/share/wordlists/rockyou.txt <ip> http-post-form -F "/:username=^USER^&password=^PASS^:F=Invalid credentials" -s 5001`
 and we found the password:
-`<image>`
+
+![hydra:](Images/checkmate_pass.png)
+
 turned out the 8 character guess was wrong but anyways.
 
 Step 4: Level 2
 
-So for This Level we see a job posting webpage and according to challenge Marco used company specific keywords for the password. User is given as Marco and the password we have to found using company keywords.
+So for This Level we see a job posting webpage and according to challenge Marco used company specific keywords for the password. User is given as Marco and the password we have to find using company keywords.
 
 so we use Cewl to create wordlist based on terms found on the target webpage:
 
@@ -45,11 +47,11 @@ Then we run hydra command:
 
 Step 5: Level 3
 
-we see that password of this level is based on marc's personal details that we had access to at the end of level 2. So here it seems a combination of his names and such will be the password
+we see that password of this level is based on marco's personal details that we had access to at the end of level 2. So here it seems a combination of his names and such will be the password
 
 so for this I found a tool called cupp -> `https://github.com/Mebus/cupp.git`
 so `git clone https://github.com/Mebus/cupp.git`
-`cd cupp` and then `python3 cupp -i`
+`cd cupp` and then `python3 cupp -i -o marco.txt`
 
 then again run hydra command:
 
@@ -65,7 +67,7 @@ Step 7: Level 5
 So according to a post of Marco on `social.thm:5003` he seems to follow a password pattern that he has revealed. So now time to crack the password. 
 
 So Company specific terms we already have from `Level 2`, 
-rest are some patterns that we follows and it seems similar to how a password policy might work and how some would still neglect it and try to keep it as simple as possible. So for this scenario 
+rest are some patterns that he follows and it seems similar to how a password policy might work and how some would still neglect it and try to keep it as simple as possible. So for this scenario 
 we are going to apply the pattern.
 
 So we see few keywords around his posts that we could use as the original wordlist is longer and would be harder to generate those patterns.
